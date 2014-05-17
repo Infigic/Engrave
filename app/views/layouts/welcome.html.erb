@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+  <head data-hook="inside_head">
+    <%= render 'shared/head'%>
+    <%= javascript_include_tag  'tabs', 'jquery.colorbox', 'colorbox' %> 
+  </head>
+  <% 
+  if @body_class.nil?
+    if @content_for_sidebar
+      @body_class = 'two-col'
+    else
+      @body_class = 'one-col'
+    end
+  end 
+%>
+<body class="<%= @body_class %>" <%= %( id="#{@body_id}") if @body_id %>>
+  <div class="wrapper">
+    <div class="header">
+      <h1 title="Engrave.in">
+        <a href="<%= root_url %>" >Engrave.in 
+          <span></span></a>
+      </h1>
+      <ul class="userpanel">
+        <%= render 'shared/nav_bar' %>
+      </ul>
+      <ul class="nav">
+        <%= render "shared/menubar" %>
+      </ul>
+    </div>
+    <!-- end header -->
+    <div class="main treecol-r homepage">
+      <div class="slider">
+        <div class="intro">
+          <h3>Memories, etched forever</h3>
+          <p>Surprise your loved ones with a laser engraved personalized
+            photo gift that is designed to last a lifetime.</p>
+          <p>
+            <a class="artbutton" href="<%= products_url %>">
+              <span>Engrave your photo <i>&#187;</i></span>
+            </a>
+          </p>
+        </div>
+        <!-- end intro -->
+
+        <%= link_to_function image_tag("carousel-photos.png", :class => "carousel-photos"),"$(\"a[rel='box']\").colorbox({open:true});return false;" %>
+
+        <!--<ul class="btns">
+          <li class="btn-left" >Left</li>
+          <li class="btn-right">Right</li>
+        </ul>-->
+      </div>
+      <div class="offer">
+        <% if BlogEntry.any? %>
+          <strong>Latest blog post:</strong> <%= BlogEntry.last.title %>
+          <%= link_to "Read Post »", entry_permalink(BlogEntry.last) %>  
+        <% end %>
+      </div>
+        <!-- end slider -->
+      <!-- end offer -->
+      <div class="content-wrapper">
+        <div class="content">
+          <!-- Center Column -->
+          <div class="box fortabs">
+            <div class="shadow-t"><i></i></div>
+            <div class="shadow-r">
+              <div class="tabs">
+  <% hello = true %>
+  <% Taxon.all.each do |taxon| %>
+    <% if taxon.children.empty? %>
+      <div class="tab <%== 'selected' if hello %>"><span class="photo-tab"><%= taxon.name %></span></div>
+           <div class="tab-con  <%== 'selected' if hello %>">
+             <%= render "shared/products", :products => taxon.products %>
+
+             <p class="view-all">
+               <%= link_to "View all", products_url %>
+             </p> 
+
+           </div>
+        <% hello = false %>
+    <% end %>
+  <% end %>
+
+              </div>
+            </div>
+            <div class="shadow-b"><i></i></div>
+          </div>
+          <div class="clear"></div>
+          <%= render 'shared/soucial' %>
+        </div>
+      </div>
+      <div id="sidebar" class="extra">
+        <%= render "shared/sidebar_static" %>
+      </div>
+    </div>
+  </div><%= render :partial => 'shared/footer'%>
+  <div style="display:none;">
+
+    <%= link_to "1",image_path("sample1.jpg"), :rel=>"box", :title=>"Me and my grandfather on the Ohoopee." %>
+    <%= link_to "2",image_path("sample2.jpg"), :rel=>"box", :title=>"Me and my grandfather on the Ohoopee." %>
+    <%= link_to "3",image_path("sample3.jpg"), :rel=>"box", :title=>"Me and my grandfather on the Ohoopee." %>
+
+  </div>
+</body>
+</html>

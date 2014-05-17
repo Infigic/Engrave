@@ -1,0 +1,17 @@
+
+<div class="gray-box">
+  <h3><%= option_type.presentation %></h3>
+    <fieldset>
+
+        <ul class="fonts-list">
+          <li class="type1"></li>
+          <li class="type4"></li>
+          <li class="type2"></li>
+          <li class="type5"></li>
+          <li class="type3"></li>
+          <li class="type6"></li>
+        </ul>
+
+        <%= select_tag "ad_hoc_option_values[#{option_type.id}]", options_from_collection_for_select(option_type.option_values, :id, :presentation),:class=>"font-type", :name => "ad_hoc_option_values[#{option_type.id}]" %>
+      </fieldset>
+</div>

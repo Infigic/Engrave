@@ -1,0 +1,29 @@
+<ul class="soucial">
+  <% unless current_page?( root_path )  %>
+    <li>
+      <a href="/posts" class="blog">
+        <%= image_tag "blog_icon.png", :alt=>"Visit our blog" %>
+      </a>
+      <a href="/posts">Visit our blog</a>
+    </li>
+  <% end %>
+  <li>
+    <a href="http://picasaweb.google.com/engravedotin" class="picasa">
+      <%= image_tag "picasa_icon.png", :alt=>"Picasa Album with Sample Pictures" %>
+    </a>
+    <a href="http://picasaweb.google.com/engravedotin">Picasa Album with Sample Pictures</a>
+  </li>
+  <li>
+    <a href="http://twitter.com/engravedotin" class="twitter">
+      <%= image_tag "twitter_icon.png", :alt=>"@engravedotin" %>
+    </a>
+    <a href="http://twitter.com/engravedotin">@engravedotin</a>
+  </li>
+  <li>
+    <a href="http://www.facebook.com/engravedotin" class="facebook">
+      <%= image_tag "facebook_icon.png", :alt=>"Engrave.in on Facebook" %>
+    </a>
+    <a href="http://www.facebook.com/engravedotin">Engrave.in on Facebook</a>
+  </li>
+</ul>
+

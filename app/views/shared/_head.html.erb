@@ -1,0 +1,12 @@
+<title><%= title %></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<%= stylesheet_link_tag "store/application", :media => "screen" %>
+<%= javascript_include_tag 'jquery-core.js', 'image_uploader.js' %>
+<% unless I18n.locale.to_s[0..1] == 'en' -%>
+  <%= javascript_include_tag ['localization/messages_', I18n.locale.to_s[0..1], '.js'].join %>
+<% end -%> 
+<!--[if lte IE 7]>
+<link rel="stylesheet" type="text/css" media="Screen,projection" href="/stylesheets/ie.css" />
+<![endif]-->
+<%= yield :head %>
+

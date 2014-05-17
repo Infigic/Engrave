@@ -1,0 +1,14 @@
+<% 
+   class_str='ad-hoc-option-select'
+   class_str += ' has_exclusions' if !@product.ad_hoc_variant_exclusions.empty?
+%>
+<div class="gray-box">
+  <h3><%= option_type.presentation %></h3>
+    <% option_type.option_values.each do |ah_ov| %>
+
+      <p>
+          <%= radio_button_tag "ad_hoc_option_values[#{option_type.id}][]", ah_ov.id.to_s, false, :class => class_str %>
+          <span class="variant-description"><%= "#{ah_ov.option_value.presentation}"%></span>
+      </p>
+    <% end %>
+  </div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+  <head data-hook="inside_head">
+    <%= render 'shared/head'%>
+  </head>
+  <% hook :inside_head do %><%= render :partial => 'shared/head'%><% end %>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <h1 title="Engrave.in"><a href="<%= root_url %>">Engrave.in<span></span></a></h1>
+        <ul class="userpanel">
+          <%= render 'shared/nav_bar' %>
+        </ul>
+        <ul class="nav">
+          <%= render "shared/menubar" %>
+        </ul>
+      </div>
+      <div class="main onecol innerpage">
+        <div class="content-wrapper box">
+          <div class="shadow-t"><i></i></div>
+          <div class="shadow-r">
+            <div class="content"><!-- Center Column -->
+              <%= yield %>				
+            </div>
+          </div>
+        </div>
+        <div class="shadow-b"><i></i></div>
+        <%= render "shared/soucial" %>
+      </div>
+    </div>
+    <%= render :partial => "shared/footer" %>
+  </body>
+</html>
+

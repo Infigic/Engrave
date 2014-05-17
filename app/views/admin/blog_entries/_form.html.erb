@@ -1,0 +1,43 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'nicEdit', 'nicEditConfig' %>
+  <%= stylesheet_link_tag 'blog' %>
+<% end %>
+
+<% if @blog_entry.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= t(:blog_form_error_message) %></h2>
+  </div>
+<% end %>
+
+<p>
+  <%= form.label :title %> <span class="required">*</span><br />
+  <%= form.text_field :title %>
+  <%= form.error_message_on :title %>
+</p>
+
+<p>
+
+<p>
+<%= form.label :body %><br />
+  <%= form.text_area :body, :id => 'blog_entry_body', :style => 'width: 700px' %>
+  <%= form.error_message_on :body %>
+</p>
+
+<p>
+  <%= form.label :tag_list, 'Tag List' %><br />
+  <%= form.text_field :tag_list %>
+  <%= t('tag_list_example') %>
+</p>
+
+<div id="blog_entry_image_fields">
+<%= form.label :attachment, t(:images) %><br/>
+<%= form.fields_for :images do |f_images| %>
+    <%= render 'image_fields', :f => f_images %>
+<% end %>
+</div>
+
+<p>
+<%= link_to_add_fields icon('add') + ' ' + t("add_image"),
+    "div#blog_entry_image_fields", form, :images %>
+</p>
+

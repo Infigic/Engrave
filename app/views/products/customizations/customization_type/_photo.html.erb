@@ -1,0 +1,88 @@
+<% id = OptionType.find_by_name('photo').id 
+   option_type = AdHocOptionType.find_by_option_type_id(id) %>
+<div class="gray-box free-box">  
+  <h3><%= product_customization_type.presentation %></h3>
+        <p>
+          High-quality engraving starts with high-quality images. Minimum image resolution required for different sizes is as follows:<br><br>5"x7" - 600x840 pixels<br>6"x8" - 768x1024 pixels<br>9"x12" - 1200x1600 pixels<br><br>You have three options to send us the photo you wish to get engraved.
+        </p>
+    
+    <table width="100%">
+      <tbody>
+            <% option_type.option_values.sort!{ |a,b| a.option_value.name.downcase <=> b.option_value.name.downcase }.each do |ah_ov| %>
+              <% case ah_ov.option_value.name
+                  when 'option1' %>
+                      <tr>
+                        <td width="35px">
+                          <%= radio_button_tag "ad_hoc_option_values[#{option_type.id}][]", ah_ov.id.to_s, false, :class => "photo_option uploader_option" %>
+                        </td>
+                        <td>
+                          <b>Option 1</b>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>Upload your image below. Files accepted are "JPG, JPEG, BMP, GIF, PNG, PSD, PDF, DOC, TIF"</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>
+                          <%= file_field_tag "#{param_prefix}[#{product_customization_type.customizable_product_options.first.id}][customization_image]", :class=>"customization", :id => "artwork_photo", :size => "30", :disabled => true %>
+      <% # the price is stored here on change, and later collected by the product-wide updatePrice() %>
+                          <%= hidden_field_tag "customization_price", "0", :class => "customization_price" %>
+                          <!-- <input id="artwork_photo" name="artwork[photo]" onchange="file_check();" size="30" type="file" disabled=""></td>-->
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>If you have problems uploading please use "Option 2" below.</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">&nbsp;</td>
+                      </tr>
+              <% when 'option2' %>
+                      <tr>
+                        <td>
+                          <%= radio_button_tag "ad_hoc_option_values[#{option_type.id}][]", ah_ov.id.to_s, false, :class => "photo_option"%>
+                        </td>
+                        <td><b>Option 2</b></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>Email the photo to support@engrave.in.</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">&nbsp;</td>
+                      </tr>
+              <% when 'option3' %>
+                  <tr>
+                    <td>
+                        <%= radio_button_tag "ad_hoc_option_values[#{option_type.id}][]", ah_ov.id.to_s, false, :class => "photo_option"%>
+                    </td>
+                    <td><b>Option 3</b></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Mail your image to address below.</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><b>Gratifi Ecommerce</b><br>B-236, Popular Center,<br>Shyamal Cross Road, Satellite<br>Ahmedabad - 380015.</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">&nbsp;</td>
+                  </tr>
+              <% when 'option4' %>
+                  <tr>
+                    <td>
+                        <%= radio_button_tag "ad_hoc_option_values[#{option_type.id}][]", ah_ov.id.to_s, false, :class => "photo_option"%>
+                    </td>
+                    <td><b>Option 4</b></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>I do not wish to engrave a photograph.</td>
+                  </tr>
+              <% end %>
+            <% end %>
+      </tbody>
+    </table>
+</div>

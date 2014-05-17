@@ -1,0 +1,45 @@
+<%= form_for :order, :url => populate_orders_url, :class => "parameters" do |f| %>
+  <div data-hook="inside_product_cart_form">
+    <p>
+      <%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
+    </p>
+
+
+        <div data-hook="product_price">
+          <p class="prices" style="position: absolute; top: 10px;">
+            <%= t("price") %>
+            <span class="price selling"><%= number_to_currency product_price(@product) %></span>
+          </p>
+        </div>
+
+    <div class="gray-box free-box" style="text-align:right;">
+      <% if @product.has_stock? || Spree::Config[:allow_backorders] %>
+        <%= text_field_tag (@product.has_variants? ? :quantity : "variants[#{@product.master.id}]"),
+          1, :class => "title", :size => 5 %>
+          &nbsp;
+          <button type='submit' class='large primary' id='add_to_cart_submit'>
+            <%= image_tag('add-to-cart.png') + t('add_to_cart') %>
+          </button>
+        <% else %>
+          <%= content_tag('strong', t('out_of_stock')) %>
+        <% end %>
+      <% content_for :head do %>
+        <script type="text/javascript" charset="utf-8">
+          var images = new Array();
+          <% @variants.each do |v| %>
+            images[<%= v.id.to_s %>] = new Array();
+            <% v.images.each_with_index do |image, i| %>
+              images[<%= v.id.to_s %>][<%= i %>] = <%= link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product)).to_json %>;
+              <% end %>
+            <% end %>
+            </script>
+      <% end %>
+    </div>
+</div>
+<% end %>
+
+
+      <% content_for :head do %>
+        <%= javascript_include_tag 'product' %>
+      <% end %>
+      

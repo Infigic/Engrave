@@ -1,0 +1,26 @@
+<div class="gray-box free-box">  
+  <h3><%= product_customization_type.presentation %></h3>
+      <%= product_customization_type.description %>
+
+        <% param_prefix = "product_customizations[#{product_customization_type.id}]" %>
+	      <% product_customization_type.customizable_product_options.each do |option| %>
+                	              <label><%= option.presentation %></label>
+
+                                      <%= text_area_tag "#{param_prefix}[#{option.id}]", "", :style=>"float: left;", :class=>"customization", :cols => "40", :rows => "7" %>
+        <% end # options.each %>
+        <br>
+        <strong>Example:</strong><br>
+          Engrave the text in Line 1 above the photo and Line 2 &amp; 3 below the photo:<br>
+          Line 1: Forever in Love<br>
+          Line 2: Raj &amp; Simran<br>
+          Line 3: 15th Wedding Anniversary, London 2010<br>
+          I have chosen Font Type 5 for the engraving but that is only for Line 1. Line 2 &amp; 3 must be engraved in Font Type 1.<br><br>
+         
+        <i>Note</i>: We may get in touch with you in case there is an issue accommodating the text.
+        <br><br>
+        <strong>Message Library:</strong><br>
+        <a href="http://engrave.in/message-library#anniv" target="_blank">Anniversary</a>
+        <br>
+        <a href="http://engrave.in/message-library#bday" target="_blank">Birthday</a>      
+
+</div>
